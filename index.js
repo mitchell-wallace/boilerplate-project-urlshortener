@@ -49,8 +49,13 @@ app.post('/api/shorturl', (req, res) => {
 });
 
 app.get('/api/shorturl/:id', (req, res) => {
+  
+  if (req.params.id >= urlArray.length) {
+    res.json({"error": "Invalid short_url"});
+  }
 
-  // search urlArray for short_url == id; redirect to corresponding original_url
+  short_url = req.params.id;
+  res.redirect(urlArray[short_url]);
 });
 
 app.listen(port, function() {
